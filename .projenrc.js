@@ -29,10 +29,22 @@ const cdkProject = new AwsCdkTypeScriptApp({
 
 cdkProject.synth();
 
-const nextProject = new web.NextJsTypeScriptProject({
+const nextProject = new web.NextJsProject({
   name: 'cdk-appsync-next-demo-frontend',
   parent: cdkProject,
   outdir: 'frontend',
+
+  deps: [
+    '@aws-amplify/ui-react',
+    'aws-amplify'
+  ],
+  devDeps: [
+    'aws-sdk'
+  ],
+
+  gitignore: [
+    'aws-exports.js'
+  ],
 
   // Disable GitHub
   mergify: false,

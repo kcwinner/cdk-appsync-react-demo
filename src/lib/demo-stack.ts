@@ -8,7 +8,25 @@ export class DemoStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
 
-    const userPool = new UserPool(this, 'demo-user-pool');
+    const userPool = new UserPool(this, 'demo-user-pool', {
+      selfSignUpEnabled: true,
+      autoVerify: {
+        email: true
+      },
+      standardAttributes: {
+        email: {
+          mutable: true,
+          required: true
+        },
+        phoneNumber: {
+          mutable: true,
+          required: true
+        }
+      },
+      signInAliases: {
+        username: true
+      }
+    });
 
     const userPoolClient = new UserPoolClient(this, 'demo-user-pool-client', {
       userPool,
@@ -38,18 +56,19 @@ export class DemoStack extends Stack {
     });
 
     // Outputs
-    new CfnOutput(this, 'aws_user_pools_web_client_id', {
-      exportName: 'awsUserPoolsWebClientId',
+    new CfnOutput(this, 'awsUserPoolId', {
+      value: userPool.userPoolId
+    });
+
+    new CfnOutput(this, 'awsUserPoolWebClientId', {
       value: userPoolClient.userPoolClientId
     });
 
-    new CfnOutput(this, 'aws_appsync_apiKey', {
-      exportName: 'awsAppsyncApiKey',
+    new CfnOutput(this, 'awsAppsyncApiKey', {
       value: appsyncTransformer.appsyncAPI.apiKey || ''
     });
 
-    new CfnOutput(this, "aws_appsync_authenticationType", {
-      exportName: 'awsAppsyncAuthenticationType',
+    new CfnOutput(this, "awsAppsyncAuthenticationType", {
       value: AuthorizationType.API_KEY
     });
   }
