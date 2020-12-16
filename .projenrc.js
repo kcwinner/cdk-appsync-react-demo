@@ -6,9 +6,16 @@ const cdkProject = new AwsCdkTypeScriptApp({
 
   cdkVersion: '1.77.0',
   cdkDependencies: [
+    '@aws-cdk/aws-appsync',
+    '@aws-cdk/aws-cognito',
+    '@aws-cdk/core'
   ],
   deps: [
+    'cdk-appsync-transformer'
+  ],
 
+  gitignore: [
+    'appsync/'
   ],
 
   // Disable GitHub
@@ -25,7 +32,15 @@ cdkProject.synth();
 const nextProject = new web.NextJsTypeScriptProject({
   name: 'cdk-appsync-next-demo-frontend',
   parent: cdkProject,
-  outdir: 'frontend'
+  outdir: 'frontend',
+
+  // Disable GitHub
+  mergify: false,
+  buildWorkflow: false,
+  releaseWorkflow: false,
+  rebuildBot: false,
+  dependabot: false,
+  pullRequestTemplate: false
 })
 
 nextProject.synth();

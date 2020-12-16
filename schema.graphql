@@ -1,0 +1,10 @@
+type Post @model
+  @auth(rules: [
+    { allow: owner },
+    { allow: public, provider: apiKey }
+  ]) {
+    id: ID!
+    title: String!
+    content: String!
+    username: String!
+}
