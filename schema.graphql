@@ -8,3 +8,16 @@ type Post @model
     content: String!
     username: String!
 }
+
+# https://jsonplaceholder.typicode.com/
+type Todo {
+  id: Int!
+  userId: Int!
+  title: String!
+  completed: Boolean!
+}
+
+type Query {
+  listTodos: [Todo] @http(url: "https://jsonplaceholder.typicode.com/todos")
+  getTodo: Todo @http(url: "https://jsonplaceholder.typicode.com/todos/:id")
+}

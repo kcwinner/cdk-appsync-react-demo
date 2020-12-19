@@ -2,6 +2,16 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const listTodos = /* GraphQL */ `
+  query ListTodos {
+    listTodos {
+      id
+      userId
+      title
+      completed
+    }
+  }
+`;
 export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
@@ -32,6 +42,16 @@ export const listPosts = /* GraphQL */ `
         owner
       }
       nextToken
+    }
+  }
+`;
+export const getTodo = /* GraphQL */ `
+  query GetTodo($params: QueryGetTodoParamsInput!) {
+    getTodo(params: $params) {
+      id
+      userId
+      title
+      completed
     }
   }
 `;

@@ -52,6 +52,39 @@ export type Post = {
   owner?: Maybe<Scalars['String']>;
 };
 
+export type Todo = {
+  __typename?: 'Todo';
+  id: Scalars['Int'];
+  userId: Scalars['Int'];
+  title: Scalars['String'];
+  completed: Scalars['Boolean'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  listTodos?: Maybe<Array<Maybe<Todo>>>;
+  getPost?: Maybe<Post>;
+  listPosts?: Maybe<ModelPostConnection>;
+  getTodo?: Maybe<Todo>;
+};
+
+
+export type QueryGetPostArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryListPostsArgs = {
+  filter?: Maybe<ModelPostFilterInput>;
+  limit?: Maybe<Scalars['Int']>;
+  nextToken?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryGetTodoArgs = {
+  params: QueryGetTodoParamsInput;
+};
+
 export enum ModelSortDirection {
   Asc = 'ASC',
   Desc = 'DESC'
@@ -124,24 +157,6 @@ export type ModelPostFilterInput = {
   not?: Maybe<ModelPostFilterInput>;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  getPost?: Maybe<Post>;
-  listPosts?: Maybe<ModelPostConnection>;
-};
-
-
-export type QueryGetPostArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryListPostsArgs = {
-  filter?: Maybe<ModelPostFilterInput>;
-  limit?: Maybe<Scalars['Int']>;
-  nextToken?: Maybe<Scalars['String']>;
-};
-
 export type CreatePostInput = {
   id?: Maybe<Scalars['ID']>;
   title: Scalars['String'];
@@ -204,6 +219,10 @@ export type SubscriptionOnDeletePostArgs = {
   owner?: Maybe<Scalars['String']>;
 };
 
+export type QueryGetTodoParamsInput = {
+  id: Scalars['String'];
+};
+
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
 }>;
@@ -243,6 +262,17 @@ export type DeletePostMutation = (
   )> }
 );
 
+export type ListTodosQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListTodosQuery = (
+  { __typename?: 'Query' }
+  & { listTodos?: Maybe<Array<Maybe<(
+    { __typename?: 'Todo' }
+    & Pick<Todo, 'id' | 'userId' | 'title' | 'completed'>
+  )>>> }
+);
+
 export type GetPostQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -272,6 +302,19 @@ export type ListPostsQuery = (
       { __typename?: 'Post' }
       & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
     )>>> }
+  )> }
+);
+
+export type GetTodoQueryVariables = Exact<{
+  params: QueryGetTodoParamsInput;
+}>;
+
+
+export type GetTodoQuery = (
+  { __typename?: 'Query' }
+  & { getTodo?: Maybe<(
+    { __typename?: 'Todo' }
+    & Pick<Todo, 'id' | 'userId' | 'title' | 'completed'>
   )> }
 );
 
@@ -369,6 +412,22 @@ export const useDeletePostMutation = (variables: DeletePostMutationVariables, op
     amplifyFetcher<DeletePostMutation, DeletePostMutationVariables>(DeletePostDocument, variables),
     options
   );
+export const ListTodosDocument = `
+    query ListTodos {
+  listTodos {
+    id
+    userId
+    title
+    completed
+  }
+}
+    `;
+export const useListTodosQuery = (variables?: ListTodosQueryVariables, options?: QueryConfig<ListTodosQuery>) => 
+  useQuery<ListTodosQuery>(
+    ['ListTodos', variables],
+    amplifyFetcher<ListTodosQuery, ListTodosQueryVariables>(ListTodosDocument, variables),
+    options
+  );
 export const GetPostDocument = `
     query GetPost($id: ID!) {
   getPost(id: $id) {
@@ -408,6 +467,22 @@ export const useListPostsQuery = (variables?: ListPostsQueryVariables, options?:
   useQuery<ListPostsQuery>(
     ['ListPosts', variables],
     amplifyFetcher<ListPostsQuery, ListPostsQueryVariables>(ListPostsDocument, variables),
+    options
+  );
+export const GetTodoDocument = `
+    query GetTodo($params: QueryGetTodoParamsInput!) {
+  getTodo(params: $params) {
+    id
+    userId
+    title
+    completed
+  }
+}
+    `;
+export const useGetTodoQuery = (variables: GetTodoQueryVariables, options?: QueryConfig<GetTodoQuery>) => 
+  useQuery<GetTodoQuery>(
+    ['GetTodo', variables],
+    amplifyFetcher<GetTodoQuery, GetTodoQueryVariables>(GetTodoDocument, variables),
     options
   );
 export const OnCreatePostDocument = `
