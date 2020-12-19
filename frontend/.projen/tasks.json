@@ -8,15 +8,20 @@
     "test": {
       "name": "test",
       "category": "10.test",
-      "description": "Run tests"
+      "description": "Runs tests",
+      "steps": [
+        {
+          "exec": "react-scripts test"
+        }
+      ]
     },
     "build": {
       "name": "build",
       "category": "00.build",
-      "description": "Creates an optimized production build of your Next.js application",
+      "description": "Creates an optimized production build of your React application",
       "steps": [
         {
-          "exec": "next build"
+          "exec": "react-scripts build"
         }
       ]
     },
@@ -58,33 +63,57 @@
         }
       ]
     },
+    "watch": {
+      "name": "watch",
+      "category": "00.build",
+      "description": "Watch & compile in the background",
+      "steps": [
+        {
+          "exec": "tsc -w"
+        }
+      ]
+    },
     "dev": {
       "name": "dev",
-      "category": "00.build",
-      "description": "Starts the Next.js application in development mode",
+      "description": "Runs the application locally",
       "steps": [
         {
-          "exec": "next dev"
+          "exec": "react-scripts start"
         }
       ]
     },
-    "server": {
-      "name": "server",
-      "category": "20.release",
-      "description": "Starts the Next.js application in production mode",
-      "steps": [
-        {
-          "exec": "next start"
-        }
-      ]
-    },
-    "telemetry": {
-      "name": "telemetry",
+    "eject": {
+      "name": "eject",
       "category": "99.misc",
-      "description": "Checks the status of Next.js telemetry collection",
+      "description": "Ejects your React application from react-scripts",
       "steps": [
         {
-          "exec": "next telemetry"
+          "exec": "react-scripts eject"
+        }
+      ]
+    },
+    "copy-schema": {
+      "name": "copy-schema",
+      "steps": [
+        {
+          "exec": "cp ../appsync/schema.graphql ./schema.graphql"
+        }
+      ]
+    },
+    "generate-statements": {
+      "name": "generate-statements",
+      "steps": [
+        {
+          "exec": "node bin/generateStatements.js"
+        }
+      ]
+    },
+    "codegen": {
+      "name": "codegen",
+      "description": "Copies the backend schema and generates frontend code",
+      "steps": [
+        {
+          "exec": "yarn run copy-schema && yarn run generate-statements && graphql-codegen --config codegen.yml && rm schema.graphql"
         }
       ]
     }

@@ -1,6 +1,6 @@
 # CDK Appsync Transformer Next Demo
 
-Built on top of [@dabit3's](https://twitter.com/dabit3) [Full stack with Next.js, Amplify, & CDK example](https://github.com/dabit3/amplify-with-cdk).
+
 
 ## To deploy as is
 
@@ -21,18 +21,19 @@ npm run test
 npm run deploy
 ```
 
-1. Generate Exports
+1. Generate Exports && GraphQL Types
 ```
+cd frontend
 node frontend/bin/generateExports.js
+yarn run codegen
 ```
 
 1. Run the frontend locally
 ```bash
-cd frontend
-npm run dev
+yarn run dev
 ```
 
 ## References
 
-* [Full stack with Next.js, Amplify, & CDK example by Nader Dabit](https://github.com/dabit3/amplify-with-cdk)
+
 * [cdk-appsync-transformer](https://github.com/kcwinner/cdk-appsync-transformer)

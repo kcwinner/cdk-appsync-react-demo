@@ -1,7 +1,7 @@
 type Post @model
   @auth(rules: [
     { allow: owner },
-    { allow: public, provider: apiKey }
+    { allow: public, provider: iam }
   ]) {
     id: ID!
     title: String!

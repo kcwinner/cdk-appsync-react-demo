@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const path = require('path');
 
@@ -11,6 +12,7 @@ const STACK_NAME = `cdk-appsync-next-demo`;
 const appsyncGraphQLURLOutputKey = 'appsyncGraphQLEndpointOutput';
 const userPoolIdOutputKey = 'awsUserPoolId';
 const userPoolClientOutputKey = 'awsUserPoolWebClientId';
+const identityPoolOutputKey = 'awsIdentityPoolId';
 const appsyncApiKeyOutputKey = 'awsAppsyncApiKey';
 const authenticationTypeOutputKey = 'awsAppsyncAuthenticationType';
 
@@ -22,7 +24,7 @@ let awsmobile = {
     aws_cognito_region: REGION,
     aws_user_pools_id: '',
     aws_user_pools_web_client_id: '',
-    // aws_cognito_identity_pool_id: ''
+    aws_cognito_identity_pool_id: ''
 };
 
 main();
@@ -38,23 +40,27 @@ async function main() {
     const stack = stackResponse.Stacks[0];
 
     const appsyncGraphQLEndpoint = stack.Outputs.find(output => {
-        return output.OutputKey === appsyncGraphQLURLOutputKey
+        return output.OutputKey === appsyncGraphQLURLOutputKey;
     })
 
     const userPoolId = stack.Outputs.find(output => {
-        return output.OutputKey === userPoolIdOutputKey
+        return output.OutputKey === userPoolIdOutputKey;
     })
 
     const userPoolWebClientId = stack.Outputs.find(output => {
-        return output.OutputKey === userPoolClientOutputKey
+        return output.OutputKey === userPoolClientOutputKey;
+    })
+
+    const identityPoolId = stack.Outputs.find(output => {
+        return output.OutputKey === identityPoolOutputKey;
     })
 
     const appSyncApiKey = stack.Outputs.find(output => {
-        return output.OutputKey === appsyncApiKeyOutputKey
+        return output.OutputKey === appsyncApiKeyOutputKey;
     })
 
     const authenticationType = stack.Outputs.find(output => {
-        return output.OutputKey === authenticationTypeOutputKey
+        return output.OutputKey === authenticationTypeOutputKey;
     })
 
     awsmobile.aws_appsync_graphqlEndpoint = appsyncGraphQLEndpoint.OutputValue;
@@ -62,6 +68,7 @@ async function main() {
     awsmobile.aws_appsync_authenticationType = authenticationType.OutputValue;
     awsmobile.aws_user_pools_id = userPoolId.OutputValue;
     awsmobile.aws_user_pools_web_client_id = userPoolWebClientId.OutputValue;
+    awsmobile.aws_cognito_identity_pool_id = identityPoolId.OutputValue;
 
     let awsExportsPath = path.join(__dirname, '..', 'src', exportFileName);
 

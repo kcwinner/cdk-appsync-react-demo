@@ -1,0 +1,12 @@
+overwrite: true
+schema: "./*.graphql"
+documents: "src/graphql/*.ts"
+generates:
+  src/lib/api.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    config:
+      maybeValue: 'T | null | undefined'
+      fetcher: '../lib/fetcher#amplifyFetcher'
