@@ -92,6 +92,15 @@
         }
       ]
     },
+    "generate-exports": {
+      "name": "generate-exports",
+      "description": "Generates aws-exports.js",
+      "steps": [
+        {
+          "exec": "node bin/generateExports.js"
+        }
+      ]
+    },
     "copy-schema": {
       "name": "copy-schema",
       "steps": [

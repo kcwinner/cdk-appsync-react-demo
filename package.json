@@ -1,5 +1,5 @@
 {
-  "name": "cdk-appsync-next-demo",
+  "name": "cdk-appsync-react-demo",
   "bin": {},
   "scripts": {
     "projen": "npx projen",

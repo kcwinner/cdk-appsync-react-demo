@@ -1,5 +1,5 @@
 {
-  "name": "cdk-appsync-next-demo-frontend",
+  "name": "cdk-appsync-react-demo-frontend",
   "bin": {},
   "scripts": {
     "projen": "npx projen",
@@ -13,6 +13,7 @@
     "watch": "npx projen watch",
     "dev": "npx projen dev",
     "eject": "npx projen eject",
+    "generate-exports": "npx projen generate-exports",
     "copy-schema": "npx projen copy-schema",
     "generate-statements": "npx projen generate-statements",
     "codegen": "npx projen codegen"

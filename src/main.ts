@@ -1,5 +1,5 @@
 import { App } from '@aws-cdk/core';
-import  { DemoStack } from './lib/demo-stack';
+import { DemoStack } from './lib/demo-stack';
 
 // for development, use account/region from cdk cli
 const devEnv = {

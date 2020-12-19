@@ -1,7 +1,7 @@
 const { AwsCdkTypeScriptApp, web, NodePackageManager } = require('projen');
 
 const cdkProject = new AwsCdkTypeScriptApp({
-  name: 'cdk-appsync-next-demo',
+  name: 'cdk-appsync-react-demo',
   packageManager: NodePackageManager.NPM,
 
   cdkVersion: '1.79.0',
@@ -9,14 +9,14 @@ const cdkProject = new AwsCdkTypeScriptApp({
     '@aws-cdk/aws-appsync',
     '@aws-cdk/aws-cognito',
     '@aws-cdk/aws-iam',
-    '@aws-cdk/core'
+    '@aws-cdk/core',
   ],
   deps: [
-    'cdk-appsync-transformer'
+    'cdk-appsync-transformer',
   ],
 
   gitignore: [
-    'appsync/'
+    'appsync/',
   ],
 
   // Disable GitHub
@@ -25,13 +25,13 @@ const cdkProject = new AwsCdkTypeScriptApp({
   releaseWorkflow: false,
   rebuildBot: false,
   dependabot: false,
-  pullRequestTemplate: false
+  pullRequestTemplate: false,
 });
 
 cdkProject.synth();
 
 const reactProject = new web.ReactTypeScriptProject({
-  name: 'cdk-appsync-next-demo-frontend',
+  name: 'cdk-appsync-react-demo-frontend',
   parent: cdkProject,
   outdir: 'frontend',
 
@@ -51,11 +51,11 @@ const reactProject = new web.ReactTypeScriptProject({
     '@graphql-codegen/typescript-react-query',
     'amplify-graphql-docs-generator',
     'aws-sdk@^2',
-    'graphql'
+    'graphql',
   ],
 
   gitignore: [
-    'aws-exports.js'
+    'aws-exports.js',
   ],
 
   tsconfig: {
@@ -69,8 +69,8 @@ const reactProject = new web.ReactTypeScriptProject({
       moduleResolution: 'node',
       isolatedModules: true,
       noEmit: true,
-      jsx: 'react-jsx'
-    }
+      jsx: 'react-jsx',
+    },
   },
 
   // Disable GitHub
@@ -79,28 +79,30 @@ const reactProject = new web.ReactTypeScriptProject({
   releaseWorkflow: false,
   rebuildBot: false,
   dependabot: false,
-  pullRequestTemplate: false
+  pullRequestTemplate: false,
 });
-
-// Override the ReactTypescriptProject react version
-// reactProject.addDeps('react@^16');
 
 reactProject.addTask('dev', {
   description: 'Runs the application locally',
-  exec: 'react-scripts start'
+  exec: 'react-scripts start',
+});
+
+reactProject.addTask('generate-exports', {
+  description: 'Generates aws-exports.js',
+  exec: 'node bin/generateExports.js',
 });
 
 reactProject.addTask('copy-schema', {
-  exec: 'cp ../appsync/schema.graphql ./schema.graphql'
+  exec: 'cp ../appsync/schema.graphql ./schema.graphql',
 });
 
 reactProject.addTask('generate-statements', {
-  exec: 'node bin/generateStatements.js'
+  exec: 'node bin/generateStatements.js',
 });
 
 reactProject.addTask('codegen', {
   description: 'Copies the backend schema and generates frontend code',
-  exec: 'yarn run copy-schema && yarn run generate-statements && graphql-codegen --config codegen.yml && rm schema.graphql'
+  exec: 'yarn run copy-schema && yarn run generate-statements && graphql-codegen --config codegen.yml && rm schema.graphql',
 });
 
 reactProject.synth();
