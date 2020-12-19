@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import { Auth } from '@aws-amplify/auth';
 
-import { useListPostsQuery } from '../lib/api';
-import { CreatePostInput, CreatePostDocument, Post } from '../lib/api';
+import { useListPostsQuery, CreatePostInput, CreatePostDocument, Post } from '../lib/api';
 import { API } from '../lib/fetcher';
 
 const initialState = { title: '', content: '' };
