@@ -32,7 +32,7 @@ npm run deploy
 1. Generate Exports && GraphQL Types
 ```
 cd frontend
-node frontend/bin/generateExports.js
+yarn run generate-exports
 yarn run codegen
 ```
 
