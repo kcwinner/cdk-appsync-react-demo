@@ -2,13 +2,23 @@
 
 *All commands assume you have proper aws credentials*
 
-A simple CDK & React example to deploy an AppSync API with Cognito as auth. Uses AWS Amplify schema directives to transform the graphql schema.
+A simple CDK & React example to deploy an AppSync API with Cognito as auth. Uses [AWS Amplify schema directives](https://docs.amplify.aws/cli/graphql-transformer/directives) to transform the graphql schema.
 
-Deploys
+## What's in the box
+
+### AWS Resources
 * Cognito User Pool
 * Cognito Identity Pool
 * AppSync API
-* DynamoDB Table(s)
+  * AppSync Resolvers
+  * AppSync Datasources
+* DynamoDB Table
+* IAM Roles
+
+### Schema
+
+* Posts - uses @model and @auth directives to declare a simple dynamodb backed type
+* Todos - uses @http directive to grab todos from https://jsonplaceholder.typicode.com/
 
 ## To deploy as is
 
@@ -43,7 +53,7 @@ yarn run dev
 
 ## References
 
-* [projen](https://github.com/projen/projen)
 * [cdk-appsync-transformer](https://github.com/kcwinner/cdk-appsync-transformer)
 * [graphql-code-generator](https://graphql-code-generator.com/)
 * [react-query](https://github.com/tannerlinsley/react-query)
+* [projen](https://github.com/projen/projen)
