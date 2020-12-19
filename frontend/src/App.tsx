@@ -1,34 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
+import { useMutation } from 'react-query';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { useListPostsQuery } from './lib/api';
 
-import { CreatePost } from './components/createPost';
+import { CreatePostInput, CreatePostDocument, Post } from './lib/api';
 import { API } from './lib/fetcher';
 
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import config from './aws-exports';
 
 Amplify.configure(config);
 
-function App() {
-  const [authState, setAuthState] = useState<AuthState>();
-  const [user, setUser] = useState<any | undefined>();
+const initialState = { title: '', content: '' };
 
-  const { data, isLoading } = useListPostsQuery(null, {
+function App() {
+  const [post, setPost] = useState(initialState);
+  const { title, content } = post;
+
+  const { data, isLoading, refetch } = useListPostsQuery(null, {
     refetchOnWindowFocus: false
+  });
+
+  // useCreatePostMutation isn't working correctly right now
+  const [createPost] = useMutation(async (input: CreatePostInput) => {
+    const result = await API.getInstance().query(CreatePostDocument, { input });
+    return result.data?.createPost as Post;
   });
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData: any) => {
-      setAuthState(nextAuthState);
-      setUser(authData)
-
       API.updateIsSignedIn(nextAuthState === AuthState.SignedIn);
     });
   }, []);
+
+  const onChange = (e) => {
+    setPost(() => ({ ...post, [e.target.name]: e.target.value }))
+  }
+
+  const createNewPost = async () => {
+    if (!title || !content) return
+
+    const userData = await Auth.currentAuthenticatedUser();
+
+    const input = {
+      ...post,
+      username: userData.username
+    };
+
+    const createResult = await createPost(input, { onSuccess: (data) => { console.log(data) } });
+    if (createResult) {
+      refetch();
+    }
+  }
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -53,7 +79,16 @@ function App() {
       <br />
       <br />
       <div>
-        <CreatePost />
+        <h3>Create Post:</h3>
+        <div>
+          <input onChange={onChange} name="title" placeholder="Title" />
+        </div>
+        <div>
+          <textarea onChange={onChange} name="content" placeholder="Content" />
+        </div>
+        <div>
+          <button onClick={createNewPost}>Create Post</button>
+        </div>
       </div>
     </div>
   );
