@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
 import { API } from './lib/fetcher';
 
@@ -31,6 +31,7 @@ function App() {
           <li> <a href="/posts">Posts</a></li>
           <li> <a href="/todos">Todos</a></li>
         </ul>
+        <AmplifySignOut />
       </nav>
       <div>
         <Router>
