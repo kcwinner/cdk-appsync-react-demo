@@ -1,9 +1,18 @@
-import { useMutation, MutationConfig, useQuery, QueryConfig } from 'react-query';
-import { amplifyFetcher } from '../lib/fetcher';
+import {
+  useMutation,
+  MutationConfig,
+  useQuery,
+  QueryConfig
+} from "react-query";
+import { amplifyFetcher } from "../lib/fetcher";
 export type Maybe<T> = T | null | undefined;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -24,127 +33,107 @@ export type Scalars = {
   Double: any;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export type Post = {
-  __typename?: 'Post';
-  id: Scalars['ID'];
-  title: Scalars['String'];
-  content: Scalars['String'];
-  username: Scalars['String'];
-  createdAt: Scalars['AWSDateTime'];
-  updatedAt: Scalars['AWSDateTime'];
-  owner?: Maybe<Scalars['String']>;
+  __typename?: "Post";
+  id: Scalars["ID"];
+  title: Scalars["String"];
+  content: Scalars["String"];
+  username: Scalars["String"];
+  createdAt: Scalars["AWSDateTime"];
+  updatedAt: Scalars["AWSDateTime"];
+  owner?: Maybe<Scalars["String"]>;
 };
 
 export type Todo = {
-  __typename?: 'Todo';
-  id: Scalars['Int'];
-  userId: Scalars['Int'];
-  title: Scalars['String'];
-  completed: Scalars['Boolean'];
+  __typename?: "Todo";
+  id: Scalars["Int"];
+  userId: Scalars["Int"];
+  title: Scalars["String"];
+  completed: Scalars["Boolean"];
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   listTodos?: Maybe<Array<Maybe<Todo>>>;
   getPost?: Maybe<Post>;
   listPosts?: Maybe<ModelPostConnection>;
   getTodo?: Maybe<Todo>;
 };
 
-
 export type QueryGetPostArgs = {
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 };
-
 
 export type QueryListPostsArgs = {
   filter?: Maybe<ModelPostFilterInput>;
-  limit?: Maybe<Scalars['Int']>;
-  nextToken?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars["Int"]>;
+  nextToken?: Maybe<Scalars["String"]>;
 };
-
 
 export type QueryGetTodoArgs = {
   params: QueryGetTodoParamsInput;
 };
 
 export enum ModelSortDirection {
-  Asc = 'ASC',
-  Desc = 'DESC'
+  Asc = "ASC",
+  Desc = "DESC"
 }
 
 export type ModelPostConnection = {
-  __typename?: 'ModelPostConnection';
+  __typename?: "ModelPostConnection";
   items?: Maybe<Array<Maybe<Post>>>;
-  nextToken?: Maybe<Scalars['String']>;
+  nextToken?: Maybe<Scalars["String"]>;
 };
 
 export type ModelStringFilterInput = {
-  ne?: Maybe<Scalars['String']>;
-  eq?: Maybe<Scalars['String']>;
-  le?: Maybe<Scalars['String']>;
-  lt?: Maybe<Scalars['String']>;
-  ge?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  notContains?: Maybe<Scalars['String']>;
-  between?: Maybe<Array<Maybe<Scalars['String']>>>;
-  beginsWith?: Maybe<Scalars['String']>;
+  ne?: Maybe<Scalars["String"]>;
+  eq?: Maybe<Scalars["String"]>;
+  le?: Maybe<Scalars["String"]>;
+  lt?: Maybe<Scalars["String"]>;
+  ge?: Maybe<Scalars["String"]>;
+  gt?: Maybe<Scalars["String"]>;
+  contains?: Maybe<Scalars["String"]>;
+  notContains?: Maybe<Scalars["String"]>;
+  between?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  beginsWith?: Maybe<Scalars["String"]>;
 };
 
 export type ModelIdFilterInput = {
-  ne?: Maybe<Scalars['ID']>;
-  eq?: Maybe<Scalars['ID']>;
-  le?: Maybe<Scalars['ID']>;
-  lt?: Maybe<Scalars['ID']>;
-  ge?: Maybe<Scalars['ID']>;
-  gt?: Maybe<Scalars['ID']>;
-  contains?: Maybe<Scalars['ID']>;
-  notContains?: Maybe<Scalars['ID']>;
-  between?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  beginsWith?: Maybe<Scalars['ID']>;
+  ne?: Maybe<Scalars["ID"]>;
+  eq?: Maybe<Scalars["ID"]>;
+  le?: Maybe<Scalars["ID"]>;
+  lt?: Maybe<Scalars["ID"]>;
+  ge?: Maybe<Scalars["ID"]>;
+  gt?: Maybe<Scalars["ID"]>;
+  contains?: Maybe<Scalars["ID"]>;
+  notContains?: Maybe<Scalars["ID"]>;
+  between?: Maybe<Array<Maybe<Scalars["ID"]>>>;
+  beginsWith?: Maybe<Scalars["ID"]>;
 };
 
 export type ModelIntFilterInput = {
-  ne?: Maybe<Scalars['Int']>;
-  eq?: Maybe<Scalars['Int']>;
-  le?: Maybe<Scalars['Int']>;
-  lt?: Maybe<Scalars['Int']>;
-  ge?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  between?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  ne?: Maybe<Scalars["Int"]>;
+  eq?: Maybe<Scalars["Int"]>;
+  le?: Maybe<Scalars["Int"]>;
+  lt?: Maybe<Scalars["Int"]>;
+  ge?: Maybe<Scalars["Int"]>;
+  gt?: Maybe<Scalars["Int"]>;
+  between?: Maybe<Array<Maybe<Scalars["Int"]>>>;
 };
 
 export type ModelFloatFilterInput = {
-  ne?: Maybe<Scalars['Float']>;
-  eq?: Maybe<Scalars['Float']>;
-  le?: Maybe<Scalars['Float']>;
-  lt?: Maybe<Scalars['Float']>;
-  ge?: Maybe<Scalars['Float']>;
-  gt?: Maybe<Scalars['Float']>;
-  between?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  ne?: Maybe<Scalars["Float"]>;
+  eq?: Maybe<Scalars["Float"]>;
+  le?: Maybe<Scalars["Float"]>;
+  lt?: Maybe<Scalars["Float"]>;
+  ge?: Maybe<Scalars["Float"]>;
+  gt?: Maybe<Scalars["Float"]>;
+  between?: Maybe<Array<Maybe<Scalars["Float"]>>>;
 };
 
 export type ModelBooleanFilterInput = {
-  ne?: Maybe<Scalars['Boolean']>;
-  eq?: Maybe<Scalars['Boolean']>;
+  ne?: Maybe<Scalars["Boolean"]>;
+  eq?: Maybe<Scalars["Boolean"]>;
 };
 
 export type ModelPostFilterInput = {
@@ -158,205 +147,257 @@ export type ModelPostFilterInput = {
 };
 
 export type CreatePostInput = {
-  id?: Maybe<Scalars['ID']>;
-  title: Scalars['String'];
-  content: Scalars['String'];
-  username: Scalars['String'];
+  id?: Maybe<Scalars["ID"]>;
+  title: Scalars["String"];
+  content: Scalars["String"];
+  username: Scalars["String"];
 };
 
 export type UpdatePostInput = {
-  id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  username?: Maybe<Scalars['String']>;
+  id: Scalars["ID"];
+  title?: Maybe<Scalars["String"]>;
+  content?: Maybe<Scalars["String"]>;
+  username?: Maybe<Scalars["String"]>;
 };
 
 export type DeletePostInput = {
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars["ID"]>;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   createPost?: Maybe<Post>;
   updatePost?: Maybe<Post>;
   deletePost?: Maybe<Post>;
 };
 
-
 export type MutationCreatePostArgs = {
   input: CreatePostInput;
 };
 
-
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
-
 
 export type MutationDeletePostArgs = {
   input: DeletePostInput;
 };
 
 export type Subscription = {
-  __typename?: 'Subscription';
+  __typename?: "Subscription";
   onCreatePost?: Maybe<Post>;
   onUpdatePost?: Maybe<Post>;
   onDeletePost?: Maybe<Post>;
 };
 
-
 export type SubscriptionOnCreatePostArgs = {
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 };
-
 
 export type SubscriptionOnUpdatePostArgs = {
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 };
 
-
 export type SubscriptionOnDeletePostArgs = {
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 };
 
 export type QueryGetTodoParamsInput = {
-  id: Scalars['String'];
+  id: Scalars["String"];
 };
 
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
 }>;
 
-
-export type CreatePostMutation = (
-  { __typename?: 'Mutation' }
-  & { createPost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type CreatePostMutation = { __typename?: "Mutation" } & {
+  createPost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export type UpdatePostMutationVariables = Exact<{
   input: UpdatePostInput;
 }>;
 
-
-export type UpdatePostMutation = (
-  { __typename?: 'Mutation' }
-  & { updatePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type UpdatePostMutation = { __typename?: "Mutation" } & {
+  updatePost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export type DeletePostMutationVariables = Exact<{
   input: DeletePostInput;
 }>;
 
+export type DeletePostMutation = { __typename?: "Mutation" } & {
+  deletePost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
-export type DeletePostMutation = (
-  { __typename?: 'Mutation' }
-  & { deletePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type ListTodosQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ListTodosQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ListTodosQuery = (
-  { __typename?: 'Query' }
-  & { listTodos?: Maybe<Array<Maybe<(
-    { __typename?: 'Todo' }
-    & Pick<Todo, 'id' | 'userId' | 'title' | 'completed'>
-  )>>> }
-);
+export type ListTodosQuery = { __typename?: "Query" } & {
+  listTodos?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: "Todo" } & Pick<
+          Todo,
+          "id" | "userId" | "title" | "completed"
+        >
+      >
+    >
+  >;
+};
 
 export type GetPostQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars["ID"];
 }>;
 
-
-export type GetPostQuery = (
-  { __typename?: 'Query' }
-  & { getPost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type GetPostQuery = { __typename?: "Query" } & {
+  getPost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export type ListPostsQueryVariables = Exact<{
   filter?: Maybe<ModelPostFilterInput>;
-  limit?: Maybe<Scalars['Int']>;
-  nextToken?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars["Int"]>;
+  nextToken?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type ListPostsQuery = (
-  { __typename?: 'Query' }
-  & { listPosts?: Maybe<(
-    { __typename?: 'ModelPostConnection' }
-    & Pick<ModelPostConnection, 'nextToken'>
-    & { items?: Maybe<Array<Maybe<(
-      { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-    )>>> }
-  )> }
-);
+export type ListPostsQuery = { __typename?: "Query" } & {
+  listPosts?: Maybe<
+    { __typename?: "ModelPostConnection" } & Pick<
+      ModelPostConnection,
+      "nextToken"
+    > & {
+        items?: Maybe<
+          Array<
+            Maybe<
+              { __typename?: "Post" } & Pick<
+                Post,
+                | "id"
+                | "title"
+                | "content"
+                | "username"
+                | "createdAt"
+                | "updatedAt"
+                | "owner"
+              >
+            >
+          >
+        >;
+      }
+  >;
+};
 
 export type GetTodoQueryVariables = Exact<{
   params: QueryGetTodoParamsInput;
 }>;
 
-
-export type GetTodoQuery = (
-  { __typename?: 'Query' }
-  & { getTodo?: Maybe<(
-    { __typename?: 'Todo' }
-    & Pick<Todo, 'id' | 'userId' | 'title' | 'completed'>
-  )> }
-);
+export type GetTodoQuery = { __typename?: "Query" } & {
+  getTodo?: Maybe<
+    { __typename?: "Todo" } & Pick<
+      Todo,
+      "id" | "userId" | "title" | "completed"
+    >
+  >;
+};
 
 export type OnCreatePostSubscriptionVariables = Exact<{
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type OnCreatePostSubscription = (
-  { __typename?: 'Subscription' }
-  & { onCreatePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type OnCreatePostSubscription = { __typename?: "Subscription" } & {
+  onCreatePost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export type OnUpdatePostSubscriptionVariables = Exact<{
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type OnUpdatePostSubscription = (
-  { __typename?: 'Subscription' }
-  & { onUpdatePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
+export type OnUpdatePostSubscription = { __typename?: "Subscription" } & {
+  onUpdatePost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export type OnDeletePostSubscriptionVariables = Exact<{
-  owner?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type OnDeletePostSubscription = (
-  { __typename?: 'Subscription' }
-  & { onDeletePost?: Maybe<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'title' | 'content' | 'username' | 'createdAt' | 'updatedAt' | 'owner'>
-  )> }
-);
-
+export type OnDeletePostSubscription = { __typename?: "Subscription" } & {
+  onDeletePost?: Maybe<
+    { __typename?: "Post" } & Pick<
+      Post,
+      | "id"
+      | "title"
+      | "content"
+      | "username"
+      | "createdAt"
+      | "updatedAt"
+      | "owner"
+    >
+  >;
+};
 
 export const CreatePostDocument = `
     mutation CreatePost($input: CreatePostInput!) {
@@ -371,9 +412,19 @@ export const CreatePostDocument = `
   }
 }
     `;
-export const useCreatePostMutation = (variables: CreatePostMutationVariables, options?: MutationConfig<CreatePostMutation, unknown, CreatePostMutationVariables>) => 
-    useMutation<CreatePostMutation, unknown, CreatePostMutationVariables>(
-    amplifyFetcher<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument, variables),
+export const useCreatePostMutation = (
+  variables?: CreatePostMutationVariables,
+  options?: MutationConfig<
+    CreatePostMutation,
+    unknown,
+    CreatePostMutationVariables
+  >
+) =>
+  useMutation<CreatePostMutation, unknown, CreatePostMutationVariables>(
+    amplifyFetcher<CreatePostMutation, CreatePostMutationVariables>(
+      CreatePostDocument,
+      variables
+    ),
     options
   );
 export const UpdatePostDocument = `
@@ -389,9 +440,19 @@ export const UpdatePostDocument = `
   }
 }
     `;
-export const useUpdatePostMutation = (variables: UpdatePostMutationVariables, options?: MutationConfig<UpdatePostMutation, unknown, UpdatePostMutationVariables>) => 
-    useMutation<UpdatePostMutation, unknown, UpdatePostMutationVariables>(
-    amplifyFetcher<UpdatePostMutation, UpdatePostMutationVariables>(UpdatePostDocument, variables),
+export const useUpdatePostMutation = (
+  variables?: UpdatePostMutationVariables,
+  options?: MutationConfig<
+    UpdatePostMutation,
+    unknown,
+    UpdatePostMutationVariables
+  >
+) =>
+  useMutation<UpdatePostMutation, unknown, UpdatePostMutationVariables>(
+    amplifyFetcher<UpdatePostMutation, UpdatePostMutationVariables>(
+      UpdatePostDocument,
+      variables
+    ),
     options
   );
 export const DeletePostDocument = `
@@ -407,9 +468,19 @@ export const DeletePostDocument = `
   }
 }
     `;
-export const useDeletePostMutation = (variables: DeletePostMutationVariables, options?: MutationConfig<DeletePostMutation, unknown, DeletePostMutationVariables>) => 
-    useMutation<DeletePostMutation, unknown, DeletePostMutationVariables>(
-    amplifyFetcher<DeletePostMutation, DeletePostMutationVariables>(DeletePostDocument, variables),
+export const useDeletePostMutation = (
+  variables?: DeletePostMutationVariables,
+  options?: MutationConfig<
+    DeletePostMutation,
+    unknown,
+    DeletePostMutationVariables
+  >
+) =>
+  useMutation<DeletePostMutation, unknown, DeletePostMutationVariables>(
+    amplifyFetcher<DeletePostMutation, DeletePostMutationVariables>(
+      DeletePostDocument,
+      variables
+    ),
     options
   );
 export const ListTodosDocument = `
@@ -422,10 +493,16 @@ export const ListTodosDocument = `
   }
 }
     `;
-export const useListTodosQuery = (variables?: ListTodosQueryVariables, options?: QueryConfig<ListTodosQuery>) => 
+export const useListTodosQuery = (
+  variables?: ListTodosQueryVariables,
+  options?: QueryConfig<ListTodosQuery>
+) =>
   useQuery<ListTodosQuery>(
-    ['ListTodos', variables],
-    amplifyFetcher<ListTodosQuery, ListTodosQueryVariables>(ListTodosDocument, variables),
+    ["ListTodos", variables],
+    amplifyFetcher<ListTodosQuery, ListTodosQueryVariables>(
+      ListTodosDocument,
+      variables
+    ),
     options
   );
 export const GetPostDocument = `
@@ -441,10 +518,16 @@ export const GetPostDocument = `
   }
 }
     `;
-export const useGetPostQuery = (variables: GetPostQueryVariables, options?: QueryConfig<GetPostQuery>) => 
+export const useGetPostQuery = (
+  variables: GetPostQueryVariables,
+  options?: QueryConfig<GetPostQuery>
+) =>
   useQuery<GetPostQuery>(
-    ['GetPost', variables],
-    amplifyFetcher<GetPostQuery, GetPostQueryVariables>(GetPostDocument, variables),
+    ["GetPost", variables],
+    amplifyFetcher<GetPostQuery, GetPostQueryVariables>(
+      GetPostDocument,
+      variables
+    ),
     options
   );
 export const ListPostsDocument = `
@@ -463,10 +546,16 @@ export const ListPostsDocument = `
   }
 }
     `;
-export const useListPostsQuery = (variables?: ListPostsQueryVariables, options?: QueryConfig<ListPostsQuery>) => 
+export const useListPostsQuery = (
+  variables?: ListPostsQueryVariables,
+  options?: QueryConfig<ListPostsQuery>
+) =>
   useQuery<ListPostsQuery>(
-    ['ListPosts', variables],
-    amplifyFetcher<ListPostsQuery, ListPostsQueryVariables>(ListPostsDocument, variables),
+    ["ListPosts", variables],
+    amplifyFetcher<ListPostsQuery, ListPostsQueryVariables>(
+      ListPostsDocument,
+      variables
+    ),
     options
   );
 export const GetTodoDocument = `
@@ -479,10 +568,16 @@ export const GetTodoDocument = `
   }
 }
     `;
-export const useGetTodoQuery = (variables: GetTodoQueryVariables, options?: QueryConfig<GetTodoQuery>) => 
+export const useGetTodoQuery = (
+  variables: GetTodoQueryVariables,
+  options?: QueryConfig<GetTodoQuery>
+) =>
   useQuery<GetTodoQuery>(
-    ['GetTodo', variables],
-    amplifyFetcher<GetTodoQuery, GetTodoQueryVariables>(GetTodoDocument, variables),
+    ["GetTodo", variables],
+    amplifyFetcher<GetTodoQuery, GetTodoQueryVariables>(
+      GetTodoDocument,
+      variables
+    ),
     options
   );
 export const OnCreatePostDocument = `

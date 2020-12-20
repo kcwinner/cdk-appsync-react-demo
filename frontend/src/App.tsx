@@ -36,9 +36,9 @@ function App() {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" render={(props: any) => <Posts {...props}  />} />
-            <Route path="/posts" render={(props: any) => <Posts {...props}  />} />
-            <Route path="/todos" render={(props: any) => <Todos {...props}  />} />
+            <Route exact path="/" render={(props: any) => <Posts {...props} />} />
+            <Route path="/posts" render={(props: any) => <Posts {...props} />} />
+            <Route path="/todos" render={(props: any) => <Todos {...props} />} />
           </Switch>
         </Router>
       </div>

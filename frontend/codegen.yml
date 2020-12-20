@@ -10,3 +10,6 @@ generates:
     config:
       maybeValue: 'T | null | undefined'
       fetcher: '../lib/fetcher#amplifyFetcher'
+hooks:
+  afterAllFileWrite:
+    - prettier --write

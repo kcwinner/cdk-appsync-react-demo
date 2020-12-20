@@ -40,7 +40,7 @@ const reactProject = new web.ReactTypeScriptProject({
     '@aws-amplify/ui-components',
     '@aws-amplify/ui-react',
     'aws-amplify',
-    'react-query@^2', // there is an open issue for @graphql-codegen/typescript-react-query to support v3
+    'react-query@^2', // I have an open PR for react-query v3 support
     'react-router',
     'react-router-dom',
   ],
@@ -48,7 +48,7 @@ const reactProject = new web.ReactTypeScriptProject({
     '@graphql-codegen/cli',
     '@graphql-codegen/typescript',
     '@graphql-codegen/typescript-operations',
-    '@graphql-codegen/typescript-react-query',
+    '@graphql-codegen/typescript-react-query@alpha',
     'amplify-graphql-docs-generator',
     'aws-sdk@^2',
     'graphql',

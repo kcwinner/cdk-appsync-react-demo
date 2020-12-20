@@ -2597,15 +2597,15 @@
     auto-bind "~4.0.0"
     tslib "~2.0.1"
 
-"@graphql-codegen/typescript-react-query@*":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-query/-/typescript-react-query-0.1.1.tgz#ac245ee3da200daf3ec7070357741d31a22ceafa"
-  integrity sha512-emrfMmg2y7lMB5L7wU/ksGId2/6DKAFHuyO21lBqEhZ4I1vNAaSpVdJdzY96jBJCtHuZo9RpaYoBvrhn5OJGPQ==
+"@graphql-codegen/typescript-react-query@alpha":
+  version "0.1.2-alpha-30941c7b.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-query/-/typescript-react-query-0.1.2-alpha-30941c7b.0.tgz#ce5ee03b0139b714bebbd8e476477df1287d3769"
+  integrity sha512-FzxX/1chVzMJwGGIFmdU9+ATtBUhU5aElHLgi4sOPt/uU5RVi7JKe8l45zYFDA0Pdnd3Ie2T6zqrHpQDcnBw2Q==
   dependencies:
     "@graphql-codegen/plugin-helpers" "^1.18.2"
-    "@graphql-codegen/visitor-plugin-common" "^1.17.20"
+    "@graphql-codegen/visitor-plugin-common" "1.18.0-alpha-30941c7b.0"
     auto-bind "~4.0.0"
-    camel-case "^4.1.1"
+    camel-case "^4.1.2"
     pascal-case "^3.1.1"
     tslib "~2.0.1"
 
@@ -2617,6 +2617,22 @@
     "@graphql-codegen/plugin-helpers" "^1.18.2"
     "@graphql-codegen/visitor-plugin-common" "^1.17.21"
     auto-bind "~4.0.0"
+    tslib "~2.0.1"
+
+"@graphql-codegen/visitor-plugin-common@1.18.0-alpha-30941c7b.0":
+  version "1.18.0-alpha-30941c7b.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.18.0-alpha-30941c7b.0.tgz#5e3fa2c615eef706c01f8aedcf1af4b01a753d46"
+  integrity sha512-+l/DS5uHaQmnU1f3YsYcOflzMzQn5ZT63fGIn9woeLRLjr7kLHIzG8PkLWY1RsAxRzfkKtqNodmRTJ+Q3YYRwg==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^1.18.2"
+    "@graphql-tools/optimize" "^1.0.1"
+    "@graphql-tools/relay-operation-optimizer" "^6"
+    array.prototype.flatmap "^1.2.4"
+    auto-bind "~4.0.0"
+    dependency-graph "^0.9.0"
+    graphql-tag "^2.11.0"
+    parse-filepath "^1.0.2"
+    pascal-case "^3.1.1"
     tslib "~2.0.1"
 
 "@graphql-codegen/visitor-plugin-common@^1.17.20", "@graphql-codegen/visitor-plugin-common@^1.17.21":

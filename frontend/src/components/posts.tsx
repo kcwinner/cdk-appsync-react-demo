@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useMutation } from 'react-query';
 import { Auth } from '@aws-amplify/auth';
+import { useMutation } from 'react-query';
 
-import { useListPostsQuery, CreatePostInput, CreatePostDocument, Post } from '../lib/api';
+import { useListPostsQuery, CreatePostDocument, CreatePostInput, Post } from '../lib/api';
 import { API } from '../lib/fetcher';
 
-const initialState = { title: '', content: '' };
+const initialState = { title: '', content: '', username: '' };
 
 export function Posts() {
   const [post, setPost] = useState(initialState);
@@ -35,7 +35,7 @@ export function Posts() {
       username: userData.username
     };
 
-    const createResult = await createPost(input, { onSuccess: (data) => { console.log(data) } });
+    const createResult = await createPost(input);
     if (createResult) {
       refetch();
     }
