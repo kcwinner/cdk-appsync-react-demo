@@ -410,8 +410,35 @@ export const CreatePostDocument = `
     updatedAt
     owner
   }
-}
-    `;
+}`;
+
+export const useCreatePostV3 = <
+  TError = unknown,
+  TContext = unknown
+>(
+  options?: UseMutationOptions<CreatePostMutation, TError, CreatePostMutationVariables, TContext>
+) =>
+  useMutation<CreatePostMutation, TError, CreatePostMutationVariables, TContext>(
+    (variables?: CreatePostMutationVariables) => amplifyFetcher<CreatePostMutation, CreatePostMutationVariables>(
+      CreatePostDocument,
+      variables
+    )(),
+    options
+  );
+
+
+
+// export const useDeleteBlockMutation = <TError = unknown, TContext = unknown>
+// (client: GraphQLClient, options?: UseMutationOptions<DeleteBlockMutation, TError, DeleteBlockMutationVariables, TContext>) => 
+// useMutation<DeleteBlockMutation, TError, DeleteBlockMutationVariables, TContext>(
+//   fetcher<DeleteBlockMutation, DeleteBlockMutationVariables>(client, DeleteBlockDocument),
+//   options
+// );
+
+
+
+
+
 export const useCreatePostMutation = (
   options?: UseMutationOptions<
     CreatePostMutation,
@@ -545,14 +572,11 @@ export const ListPostsDocument = `
   }
 }`;
 
-
-// type ResolvedPromise<T extends Promise<any>> = T extends Promise<infer R> ? R : never
-
-export const useListPostsQueryModified = <TData>(
+export const useListPostsQueryModified = <TData = ListPostsQuery, TError = unknown>(
   variables: ListPostsQueryVariables,
-  options?: UseQueryOptions<ListPostsQuery, unknown, TData>
-) => {
-  return useQuery<ListPostsQuery, unknown, TData>(
+  options?: UseQueryOptions<ListPostsQuery, TError, TData>
+) =>
+  useQuery<ListPostsQuery, TError, TData>(
     ["ListPosts", variables],
     amplifyFetcher<ListPostsQuery, ListPostsQueryVariables>(
       ListPostsDocument,
@@ -560,11 +584,6 @@ export const useListPostsQueryModified = <TData>(
     ),
     options
   );
-}
-
-// useQuery<unknown, unknown, TQueryFnData: TData>()
-// useMutation<TData = unknown, TError = unknown, TVariables = void, TContext = unknown>
-
 
 export const useListPostsQuery = (
   variables?: ListPostsQueryVariables,

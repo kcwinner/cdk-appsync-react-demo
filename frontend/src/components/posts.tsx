@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Auth } from '@aws-amplify/auth';
 
-import { ListPostsQuery, Post, useListPostsQuery, useListPostsQueryModified, useCreatePostMutation } from '../lib/api';
+import { useListPostsQueryModified, useCreatePostV3 } from '../lib/api';
 
 const initialState = { title: '', content: '', username: '' };
 
@@ -9,17 +9,12 @@ export function Posts() {
   const [post, setPost] = useState(initialState);
   const { title, content } = post;
 
-  // const { data, isLoading, refetch } = useListPostsQuery(null, {
-  //   refetchOnWindowFocus: false,
-  //   select: (posts) => { console.log(posts); return posts }
-  // });
-
   const { data, isLoading, refetch } = useListPostsQueryModified(null, {
     refetchOnWindowFocus: false,
     select: (posts) => posts.listPosts?.items ?? []
   });
 
-  const { mutateAsync } = useCreatePostMutation();
+  const { mutateAsync } = useCreatePostV3();
 
   const onChange = (e) => {
     setPost(() => ({ ...post, [e.target.name]: e.target.value }))
