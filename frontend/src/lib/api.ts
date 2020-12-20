@@ -1,8 +1,8 @@
 import {
   useMutation,
-  MutationConfig,
+  UseMutationOptions,
   useQuery,
-  QueryConfig
+  UseQueryOptions
 } from "react-query";
 import { amplifyFetcher } from "../lib/fetcher";
 export type Maybe<T> = T | null | undefined;
@@ -309,23 +309,23 @@ export type ListPostsQuery = { __typename?: "Query" } & {
       ModelPostConnection,
       "nextToken"
     > & {
-        items?: Maybe<
-          Array<
-            Maybe<
-              { __typename?: "Post" } & Pick<
-                Post,
-                | "id"
-                | "title"
-                | "content"
-                | "username"
-                | "createdAt"
-                | "updatedAt"
-                | "owner"
-              >
+      items?: Maybe<
+        Array<
+          Maybe<
+            { __typename?: "Post" } & Pick<
+              Post,
+              | "id"
+              | "title"
+              | "content"
+              | "username"
+              | "createdAt"
+              | "updatedAt"
+              | "owner"
             >
           >
-        >;
-      }
+        >
+      >;
+    }
   >;
 };
 
@@ -413,18 +413,17 @@ export const CreatePostDocument = `
 }
     `;
 export const useCreatePostMutation = (
-  variables?: CreatePostMutationVariables,
-  options?: MutationConfig<
+  options?: UseMutationOptions<
     CreatePostMutation,
     unknown,
     CreatePostMutationVariables
   >
 ) =>
   useMutation<CreatePostMutation, unknown, CreatePostMutationVariables>(
-    amplifyFetcher<CreatePostMutation, CreatePostMutationVariables>(
+    (variables?: CreatePostMutationVariables) => amplifyFetcher<CreatePostMutation, CreatePostMutationVariables>(
       CreatePostDocument,
       variables
-    ),
+    )(),
     options
   );
 export const UpdatePostDocument = `
@@ -442,7 +441,7 @@ export const UpdatePostDocument = `
     `;
 export const useUpdatePostMutation = (
   variables?: UpdatePostMutationVariables,
-  options?: MutationConfig<
+  options?: UseMutationOptions<
     UpdatePostMutation,
     unknown,
     UpdatePostMutationVariables
@@ -470,7 +469,7 @@ export const DeletePostDocument = `
     `;
 export const useDeletePostMutation = (
   variables?: DeletePostMutationVariables,
-  options?: MutationConfig<
+  options?: UseMutationOptions<
     DeletePostMutation,
     unknown,
     DeletePostMutationVariables
@@ -495,7 +494,7 @@ export const ListTodosDocument = `
     `;
 export const useListTodosQuery = (
   variables?: ListTodosQueryVariables,
-  options?: QueryConfig<ListTodosQuery>
+  options?: UseQueryOptions<ListTodosQuery>
 ) =>
   useQuery<ListTodosQuery>(
     ["ListTodos", variables],
@@ -520,7 +519,7 @@ export const GetPostDocument = `
     `;
 export const useGetPostQuery = (
   variables: GetPostQueryVariables,
-  options?: QueryConfig<GetPostQuery>
+  options?: UseQueryOptions<GetPostQuery>
 ) =>
   useQuery<GetPostQuery>(
     ["GetPost", variables],
@@ -544,11 +543,32 @@ export const ListPostsDocument = `
     }
     nextToken
   }
+}`;
+
+
+// type ResolvedPromise<T extends Promise<any>> = T extends Promise<infer R> ? R : never
+
+export const useListPostsQueryModified = <TData>(
+  variables: ListPostsQueryVariables,
+  options?: UseQueryOptions<ListPostsQuery, unknown, TData>
+) => {
+  return useQuery<ListPostsQuery, unknown, TData>(
+    ["ListPosts", variables],
+    amplifyFetcher<ListPostsQuery, ListPostsQueryVariables>(
+      ListPostsDocument,
+      variables
+    ),
+    options
+  );
 }
-    `;
+
+// useQuery<unknown, unknown, TQueryFnData: TData>()
+// useMutation<TData = unknown, TError = unknown, TVariables = void, TContext = unknown>
+
+
 export const useListPostsQuery = (
   variables?: ListPostsQueryVariables,
-  options?: QueryConfig<ListPostsQuery>
+  options?: UseQueryOptions<ListPostsQuery>
 ) =>
   useQuery<ListPostsQuery>(
     ["ListPosts", variables],
@@ -566,11 +586,10 @@ export const GetTodoDocument = `
     title
     completed
   }
-}
-    `;
+}`;
 export const useGetTodoQuery = (
   variables: GetTodoQueryVariables,
-  options?: QueryConfig<GetTodoQuery>
+  options?: UseQueryOptions<GetTodoQuery>
 ) =>
   useQuery<GetTodoQuery>(
     ["GetTodo", variables],

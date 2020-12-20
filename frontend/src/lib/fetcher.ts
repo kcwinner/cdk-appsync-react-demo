@@ -5,8 +5,6 @@ let instance: API | undefined = undefined;
 
 export function amplifyFetcher<TData, TVariables>(query: string, variables?: TVariables) {
     return async (): Promise<TData> => {
-        console.log('VARIABLES:', variables);
-
         const api = API.getInstance();
         const response = await api.query(query, variables);
         return response.data;

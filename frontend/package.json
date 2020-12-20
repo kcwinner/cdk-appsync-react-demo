@@ -45,7 +45,7 @@
     "aws-amplify": "^3.3.13",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-query": "^2",
+    "react-query": "^3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",

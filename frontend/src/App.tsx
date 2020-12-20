@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
@@ -14,6 +16,16 @@ import Amplify from 'aws-amplify';
 import config from './aws-exports';
 
 Amplify.configure(config);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: 10000, // 10 seconds in milliseconds
+      refetchOnMount: true,
+      refetchOnWindowFocus: false
+    }
+  }
+});
 
 function App() {
 
@@ -34,13 +46,15 @@ function App() {
         <AmplifySignOut />
       </nav>
       <div>
-        <Router>
-          <Switch>
-            <Route exact path="/" render={(props: any) => <Posts {...props} />} />
-            <Route path="/posts" render={(props: any) => <Posts {...props} />} />
-            <Route path="/todos" render={(props: any) => <Todos {...props} />} />
-          </Switch>
-        </Router>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <Switch>
+              <Route exact path="/" render={(props: any) => <Posts {...props} />} />
+              <Route path="/posts" render={(props: any) => <Posts {...props} />} />
+              <Route path="/todos" render={(props: any) => <Todos {...props} />} />
+            </Switch>
+          </Router>
+        </QueryClientProvider>
       </div>
     </div>
   );

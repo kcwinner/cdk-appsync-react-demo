@@ -40,7 +40,7 @@ const reactProject = new web.ReactTypeScriptProject({
     '@aws-amplify/ui-components',
     '@aws-amplify/ui-react',
     'aws-amplify',
-    'react-query@^2', // I have an open PR for react-query v3 support
+    'react-query@^3', // I have an open PR for react-query v3 support
     'react-router',
     'react-router-dom',
   ],

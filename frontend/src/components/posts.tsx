@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Auth } from '@aws-amplify/auth';
-import { useMutation } from 'react-query';
 
-import { useListPostsQuery, CreatePostDocument, CreatePostInput, Post } from '../lib/api';
-import { API } from '../lib/fetcher';
+import { ListPostsQuery, Post, useListPostsQuery, useListPostsQueryModified, useCreatePostMutation } from '../lib/api';
 
 const initialState = { title: '', content: '', username: '' };
 
@@ -11,15 +9,17 @@ export function Posts() {
   const [post, setPost] = useState(initialState);
   const { title, content } = post;
 
-  const { data, isLoading, refetch } = useListPostsQuery(null, {
-    refetchOnWindowFocus: false
+  // const { data, isLoading, refetch } = useListPostsQuery(null, {
+  //   refetchOnWindowFocus: false,
+  //   select: (posts) => { console.log(posts); return posts }
+  // });
+
+  const { data, isLoading, refetch } = useListPostsQueryModified(null, {
+    refetchOnWindowFocus: false,
+    select: (posts) => posts.listPosts?.items ?? []
   });
 
-  // useCreatePostMutation isn't working correctly right now
-  const [createPost] = useMutation(async (input: CreatePostInput) => {
-    const result = await API.getInstance().query(CreatePostDocument, { input });
-    return result.data?.createPost as Post;
-  });
+  const { mutateAsync } = useCreatePostMutation();
 
   const onChange = (e) => {
     setPost(() => ({ ...post, [e.target.name]: e.target.value }))
@@ -35,7 +35,7 @@ export function Posts() {
       username: userData.username
     };
 
-    const createResult = await createPost(input);
+    const createResult = await mutateAsync({ input });
     if (createResult) {
       refetch();
     }
@@ -48,8 +48,8 @@ export function Posts() {
       <div>
         <h2>Posts:</h2>
         {
-          data?.listPosts?.items
-            ? data?.listPosts?.items?.map(post => {
+          data.length > 0
+            ? data.map(post => {
               return (
                 <div>
                   <h4>Title: {post.title}</h4>
