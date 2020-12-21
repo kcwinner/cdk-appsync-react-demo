@@ -9,6 +9,6 @@ const devEnv = {
 
 const app = new App();
 
-new DemoStack(app, 'cdk-appsync-next-demo', { env: devEnv });
+new DemoStack(app, 'cdk-appsync-react-demo', { env: devEnv });
 
 app.synth();
