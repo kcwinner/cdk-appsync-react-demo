@@ -13,14 +13,13 @@ const appsyncGraphQLURLOutputKey = 'appsyncGraphQLEndpointOutput';
 const userPoolIdOutputKey = 'awsUserPoolId';
 const userPoolClientOutputKey = 'awsUserPoolWebClientId';
 const identityPoolOutputKey = 'awsIdentityPoolId';
-const appsyncApiKeyOutputKey = 'awsAppsyncApiKey';
 const authenticationTypeOutputKey = 'awsAppsyncAuthenticationType';
 
 let awsmobile = {
     aws_project_region: REGION,
     aws_appsync_graphqlEndpoint: '',
     aws_appsync_region: REGION,
-    aws_appsync_authenticationType: 'API_KEY',
+    aws_appsync_authenticationType: 'AWS_IAM',
     aws_cognito_region: REGION,
     aws_user_pools_id: '',
     aws_user_pools_web_client_id: '',
@@ -55,16 +54,11 @@ async function main() {
         return output.OutputKey === identityPoolOutputKey;
     })
 
-    const appSyncApiKey = stack.Outputs.find(output => {
-        return output.OutputKey === appsyncApiKeyOutputKey;
-    })
-
     const authenticationType = stack.Outputs.find(output => {
         return output.OutputKey === authenticationTypeOutputKey;
     })
 
     awsmobile.aws_appsync_graphqlEndpoint = appsyncGraphQLEndpoint.OutputValue;
-    awsmobile.aws_appsync_apiKey = appSyncApiKey.OutputValue;
     awsmobile.aws_appsync_authenticationType = authenticationType.OutputValue;
     awsmobile.aws_user_pools_id = userPoolId.OutputValue;
     awsmobile.aws_user_pools_web_client_id = userPoolWebClientId.OutputValue;
