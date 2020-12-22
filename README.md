@@ -60,3 +60,5 @@ yarn run dev
 * [graphql-code-generator](https://graphql-code-generator.com/)
 * [react-query](https://github.com/tannerlinsley/react-query)
 * [projen](https://github.com/projen/projen)
+* [blog post](https://kennethwinner.com/2020/12/22/react-query-appsync/)
+* [video](https://youtu.be/JOYsv_KyNBk)
