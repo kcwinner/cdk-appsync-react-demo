@@ -4,6 +4,9 @@
 
 A simple CDK & React example to deploy an AppSync API with Cognito as auth. Uses [AWS Amplify schema directives](https://docs.amplify.aws/cli/graphql-transformer/directives) to transform the graphql schema.
 
+* Checkout the [blog post](https://kennethwinner.com/2020/12/22/react-query-appsync/)
+* Watch the [demo/walkthrough](https://youtu.be/JOYsv_KyNBk)
+
 ## What's in the box
 
 ### AWS Resources
